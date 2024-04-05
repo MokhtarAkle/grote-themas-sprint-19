@@ -3,7 +3,7 @@
 </script>
 <section>
     <div>
-        <img src="/images/werkvorm-animation.gif" width="300" height="300" alt="animatie van werkvormen icoon" id="animation-image"/>
+        <img src="/images/werkvorm-animation-performant.gif" width="300" height="300" alt="animatie van werkvormen icoon" id="animation-image"/>
         <img src="/images/werkvorm-reduced.svg" width="300" height="300" alt="werkvormen icoon" id="reduced-image" />
     </div>
     <div>

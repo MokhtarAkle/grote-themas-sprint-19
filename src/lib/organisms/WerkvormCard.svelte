@@ -18,8 +18,7 @@
 		class="thumbnail"
 		src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail_performant.id}
 		alt="{workform.alt}"
-		width={workform.thumbnail.width} 
-		height={workform.thumbnail.height}
+
 		loading="lazy"
 	/>
 	{:else}
@@ -27,8 +26,7 @@
 	class="thumbnail"
 	src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail.id}
 	alt="{workform.alt}"
-	width={workform.thumbnail.width} 
-	height={workform.thumbnail.height}
+
 	loading="lazy"
 	/>
 	{/if}
@@ -59,7 +57,7 @@
 
 	article > img {
 		height: 10rem;
-		width: 100%;
+		width: 18.5rem;
 		object-fit: cover;
 		object-position: center;
 		transition: all ease-in-out var(--animation-quick);

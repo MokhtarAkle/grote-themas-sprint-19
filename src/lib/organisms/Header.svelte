@@ -43,7 +43,7 @@
             </nav>
         </div>
     </div>
-    <img src="/images/hva-triangle.svg" alt="" class="graphic">
+    <img src="/images/hva-triangle.svg" alt="Triangle" class="graphic">
 </header>
 
 <style>
