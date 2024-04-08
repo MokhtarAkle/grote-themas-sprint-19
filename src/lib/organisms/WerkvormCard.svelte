@@ -1,6 +1,34 @@
 <script>
+	import { onMount } from 'svelte';
+
 	export let workform
+	function checkLazy(){
+		const images = document.querySelectorAll('.lazy-img');
+
+			const callback = (entries, observer) =>{
+				const [entry]  = entries;
+				if(!entry.isIntersecting) return;
+				entry.target.src = entry.target.dataset.src;
+				observer.unobserve(entry.target);
+				console.log(entries)
+
+			}
+			const imgObserver = new IntersectionObserver(callback,{
+				root: document,
+				threshold: 0
+			})
+
+			images.forEach(img => imgObserver.observe(img))
+	}
+	onMount(async () => {
+
+	checkLazy();
+		document.addEventListener('scroll', checkLazy);
+	});
+
+
 </script>
+
 
 <article>
 	<ul>
@@ -15,19 +43,17 @@
 
 	{#if workform.thumbnail_performant}
 	<img
-		class="thumbnail"
-		src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail_performant.id}
+		class="thumbnail lazy-img"
+		src='/images/noise.png'
+		data-src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail_performant.id}
 		alt="{workform.alt}"
-
-		loading="lazy"
 	/>
 	{:else}
 	<img
-	class="thumbnail"
-	src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail.id}
+	class="thumbnail lazy-img"
+	src='/images/noise.png'
+	data-src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail.id}
 	alt="{workform.alt}"
-
-	loading="lazy"
 	/>
 	{/if}
 	<div>
