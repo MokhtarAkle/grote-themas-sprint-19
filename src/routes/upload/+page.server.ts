@@ -8,6 +8,8 @@ export const load = (async ({ locals: { user }, cookies }) => {
 	const reqCourse = await fetch('https://platform-big-themes.directus.app/items/course')
 	const reqContact = await fetch('https://platform-big-themes.directus.app/items/contact')
 	const reqTag = await fetch('https://platform-big-themes.directus.app/items/tag')
+	const reqSubtag = await fetch('https://platform-big-themes.directus.app/items/sub_tag');
+	const dataSubtag = await reqSubtag.json();
 	const dataCourse = await reqCourse.json()
 	const dataContact = await reqContact.json()
 	const dataTag = await reqTag.json()
@@ -15,6 +17,7 @@ export const load = (async ({ locals: { user }, cookies }) => {
 	const data = {
 		course: dataCourse.data,
 		contact: dataContact.data,
+		sub_tag: dataSubtag.data,
 		tag: dataTag.data
 	}
 	if (!user) {

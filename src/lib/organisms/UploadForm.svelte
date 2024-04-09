@@ -7,6 +7,7 @@
   import FileFormField from "$lib/molecules/FileFormField.svelte";
   import Button from "$lib/atoms/Button.svelte";
   import LimitedFormField from "../molecules/LimitedFormField.svelte";
+  import CheckFormField from "$lib/molecules/CheckFormField.svelte";
   import AccessValidator from "../molecules/AccessValidator.svelte";
   import { listValidatorClass } from '$lib/utils/tagstore.js';
 
@@ -215,6 +216,27 @@ function toggleValidator() {
       accepted={"video/*"}
       inputHint="Bijv. Een video van de werkvorm."
     />
+        <CheckFormField
+        iconSrc="/images/icons/contact.svg"
+        labelFor="selectTag"
+        labelText="Selecteer relevante tags"
+        inputType="checkbox"
+        checkName="selectTag"
+        checkId="selectTag"
+        isRequired={true}
+        {data}
+      />
+
+    <!-- <SelectFormField
+    iconSrc="/images/icons/school.svg"
+    labelFor="tagSelect"
+    labelText="Tags"
+    selectName="tagSelect"
+    selectId="tagSelect"
+    selectPlaceholder="Selecteer relevante tags..."
+    options={data.sub_tag}
+    isRequired={true}
+  /> -->
   </div>
 
   <Button btnType="submit" {btnText} on:click= {toggleValidator}></Button>
