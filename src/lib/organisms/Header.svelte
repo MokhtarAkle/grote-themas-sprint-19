@@ -28,9 +28,9 @@
                 <img src="/images/logo.svg" alt="Hogeschool van Amsterdam logo" width="128" height="28" />
             </a>
 
-            <span>Werkvormen Grote Thema's</span>
+            <span>Kleine werkvormen voor grote thema's</span>
         </div>
-
+        {#if path != "/"}
         <div class="nav-components">
             <nav>
                 {#each crumbs as c, i}
@@ -42,7 +42,8 @@
                 {/each}
             </nav>
         </div>
-    </div>
+    {/if}
+</div>
     <img src="/images/hva-triangle.svg" alt="Triangle" class="graphic">
 </header>
 

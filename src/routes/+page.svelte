@@ -27,7 +27,6 @@
 	/* ------------------------------- END ATTEMPT ------------------------------ */
 
 	export let data;
-
 	// Zoekbalk logica
 	let searchInput = null;
 
@@ -64,7 +63,7 @@
 </script>
 
 <svelte:head>
-	<title>Platform Grote Thema's</title>
+	<title>Kleine werkvormen voor grote thema's</title>
 </svelte:head>
 
 <main>
@@ -77,10 +76,12 @@
 		{#if $selectedTag !== 'allTags'}
 			<!-- als er 1 werkvorm terugkomt -->
 			{#if filteredWorkforms.length === 1}
-				<p>Er is 1 gevonden werkvorm</p>
-			{:else}
+				<p>Er is 1 gevonden werkvorm in {filteredWorkforms[0].tags[0].tag_id.title}</p>
+			{:else if filteredWorkforms. length > 1}
 				<!-- wanneer er meerdere werkvormen terugkomen -->
-				<p>Er zijn {filteredWorkforms.length} gevonden werkvormen</p>
+				<p>Er zijn {filteredWorkforms.length} werkvormen gevonden in {filteredWorkforms[0].tags[0].tag_id.title}</p>
+				{:else}
+				<p></p>
 			{/if}
 		{/if}
 	</section>

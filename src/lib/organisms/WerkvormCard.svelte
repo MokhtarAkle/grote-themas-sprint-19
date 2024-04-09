@@ -1,61 +1,54 @@
 <script>
 	import { onMount } from 'svelte';
+	import IntersectionObserver from "svelte-intersection-observer";
 
 	export let workform
-	function checkLazy(){
-		const images = document.querySelectorAll('.lazy-img');
-
-			const callback = (entries, observer) =>{
-				const [entry]  = entries;
-				if(!entry.isIntersecting) return;
-				entry.target.src = entry.target.dataset.src;
-				observer.unobserve(entry.target);
-				console.log(entries)
-
-			}
-			const imgObserver = new IntersectionObserver(callback,{
-				root: document,
-				threshold: 0
-			})
-
-			images.forEach(img => imgObserver.observe(img))
-	}
-	onMount(async () => {
-
-	checkLazy();
-		document.addEventListener('scroll', checkLazy);
-	});
 
 
+	let node;
 </script>
 
 
 <article>
 	<ul>
-		{#if workform.tags.length > 0}
-			{#each workform.tags as tag}
-				<li style="border-color: {tag.tag_id.color};">{tag.tag_id.title}</li>
+		{#if workform.tags.length > 0 && !undefined}
+			{#each workform.sub_tags as tag}
+				<li style="border-color: {tag.sub_tag_id.color};">{tag.sub_tag_id.title}</li>
 			{/each}
 		{:else}
 			<li style="border-color: white">Geen tags</li>
 		{/if}
 	</ul>
 
+	<IntersectionObserver element={node} let:intersecting>
+		<div bind:this={node}>
+		  {#if intersecting}
+
+
 	{#if workform.thumbnail_performant}
 	<img
 		class="thumbnail lazy-img"
-		src='/images/noise.png'
-		data-src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail_performant.id}
+		src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail_performant.id}
 		alt="{workform.alt}"
 	/>
 	{:else}
 	<img
 	class="thumbnail lazy-img"
-	src='/images/noise.png'
-	data-src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail.id}
+	src={'https://platform-big-themes.directus.app/assets/' + workform.thumbnail.id}
 	alt="{workform.alt}"
 	/>
 	{/if}
+	{:else}
+		<img
+		class="thumbnail lazy-img"
+		src='/images/nnnoise.svg'
+		alt="{workform.alt}"
+		/>
+	{/if}
+
+	
+</div>
+</IntersectionObserver>
 	<div>
 		<div>
 			<h2>{workform.title}</h2>
@@ -81,7 +74,7 @@
 		padding: 0.8rem;
 	}
 
-	article > img {
+	article > div > img {
 		height: 10rem;
 		width: 18.5rem;
 		object-fit: cover;

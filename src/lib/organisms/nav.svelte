@@ -3,12 +3,23 @@
 		import { onMount } from 'svelte';
 
 		onMount(async () => {
-			console.log(data)
+			let filterButton = document.querySelector("#filterSearchDesktop");
+			let feedButton = document.querySelector("#feed-forward-img");
 			let logoutAppear = document.querySelector(".logout-button")
 			if(data.user){
 				logoutAppear.classList.add('appear')
-
 			}
+
+			filterButton.addEventListener("click", () =>{
+				if(feedButton.classList.contains("unclicked")){
+					feedButton.src = "/images/icons/arrow-up.svg"
+					feedButton.classList.toggle("unclicked");
+				}
+				else{
+					feedButton.src = "/images/icons/arrow-down.svg"
+					feedButton.classList.toggle("unclicked");
+				}
+			})
 		return ;
 	});	
 		export let data;
@@ -143,7 +154,7 @@
 								</clipPath>
 							</defs>
 						</svg>
-						upload een werkvorm
+						Voeg een werkvorm toe
 					</a>
 				</li>
 			</ul>
@@ -183,6 +194,7 @@
 					</defs>
 				</svg>
 				filteren & zoeken
+				<img src="/images/icons/arrow-down.svg" alt="down arrow" id="feed-forward-img" class="unclicked"> 
 			</button>
 		</li>
 
@@ -348,6 +360,11 @@ nav figure {
     display: flex;
     gap: var(--unit-small);
     justify-content: center;
+}
+
+img{
+	width: 1.25em;
+	height: 1.25em;
 }
 
 /* Filter button */
