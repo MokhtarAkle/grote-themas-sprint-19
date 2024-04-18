@@ -72,7 +72,7 @@
 	<Nav {data} ></Nav>
 	<NavFilterList {data} {searchInput} />
 	<!-- als selectedtags niet op alletags staat dan wordt er weergeven hoeveel werkvormen er zijn gevonden -->
-	<section class="gevonden-werkvormen">
+	<div class="gevonden-werkvormen">
 		{#if $selectedTag !== 'allTags'}
 			<!-- als er 1 werkvorm terugkomt -->
 			{#if filteredWorkforms.length === 1}
@@ -84,7 +84,7 @@
 				<p></p>
 			{/if}
 		{/if}
-	</section>
+	</div>
 
 	<section class="werkvormen" id="custom-view">
 		<!-- Check if filteredWorkforms array contains more than 1 object -->

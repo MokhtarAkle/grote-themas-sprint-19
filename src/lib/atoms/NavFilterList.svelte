@@ -69,23 +69,24 @@
 			</button>
 		</fieldset>
 	</form>
-	<section class="header-tags">
-		<button
+	<ul class="header-tags">
+		<li><button
 			class:selected-tag={selectedTag === data.tag}
 			class:active-tag={$selectedTag === 'allTags'}
 			on:click={() => selectedTag.set('allTags')}>Alle tags</button
-		>
+			>
+		</li>
 		{#each data.tag as tag}
-		<div class="button-grouper">
-			<button
+		<li class="button-grouper">	
+				<button
 				class:selected-tag={selectedTag === tag.title}
 				class:active-tag={$selectedTag === tag.id}
 				class="button-tags"
 				style="border: 2px solid {tag.color};"
 				on:click={() => handleTagClick(tag.id)}
-			>
+				>
 				{tag.title}
-			</button>
+				</button>
 			<div class="sub-select hidden">
 				{#each data.sub_tag as sub}
 				{#if tag.sub_tag && tag.sub_tag.includes(sub.id)}
@@ -96,9 +97,9 @@
 			{/if}
 			{/each}
 			</div>
-		</div>
+		</li>	
 		{/each}
-	</section>
+	</ul>
 	<!-- secondaire rij met tags, uitgecomment wegens feedback -->
 	<!-- <section>
 		{#each data.tag as tag}
@@ -251,12 +252,12 @@
 		}
 	}
 
-	section {
+	ul {
 		display: flex;
 		flex-direction: row;
 	}
 
-	section button {
+	ul button {
 		color: var(--color-white);
 		margin: var(--unit-small) var(--unit-small);
 	}
