@@ -14,11 +14,13 @@
     export let data;
 </script>
 
+<span>
+	<Icon {iconSrc} --icon-width="1.4rem"></Icon>
+	<Label {labelFor} {labelText}></Label>
+</span>
+
 <div class="form-field">
-	<span>
-		<Icon {iconSrc} --icon-width="1.4rem"></Icon>
-		<Label {labelFor} {labelText}></Label>
-	</span>
+
 
 	<CheckInput {inputType} {checkName} {checkId} {options} {isRequired} {data}></CheckInput>
 </div>
@@ -26,7 +28,8 @@
 <style>
     .form-field {
         display: flex;
-        flex-direction: column;
+		flex-flow: column wrap;
+		height: 18em;
     }
 	span {
 		display: flex;

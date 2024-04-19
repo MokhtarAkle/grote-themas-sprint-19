@@ -216,8 +216,6 @@
 	}
 
 	form button::before {
-		background-image: url('https://img.freepik.com/free-vector/seamless-grainy-texture-background_1409-2115.jpg');
-		background-size: 180%;
 		border-radius: var(--unit-micro);
 		content: '';
 		height: 100%;

@@ -8,7 +8,9 @@
 
     console.log(data.tag)
 </script>
+
 {#each data.tag as tag}
+<span class="tag-title">{tag.title}</span>
 {#each data.sub_tag as sub}
 {#if tag.sub_tag && tag.sub_tag.includes(sub.id)}
 <label>
@@ -48,6 +50,10 @@
     input:user-invalid + span::before {
         content: "✖";
         color: red;
+    }
+
+    .tag-title{
+        font-weight: bold;
     }
 
     @media (min-width: 170rem) {
