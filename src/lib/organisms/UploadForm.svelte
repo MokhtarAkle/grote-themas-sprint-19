@@ -20,7 +20,6 @@
   let validatorHidden = true;
 
   data = data.data;
-  console.log(data)
   let tagOptions = data.tag.map((tag) => {
     return {
       id: tag.id,
@@ -69,17 +68,17 @@ function toggleValidator() {
     let removed = false;
 
     for (let i = 0; i < errorStandard.length; i++) {
+      if(errorStandard[i].type != "checkbox"){
       errorStandard[i].setCustomValidity(
         "Vul " + labelStandard[i].innerHTML + " in."
       );
       newValidator.push(errorStandard[i].validationMessage);
       newValidator = newValidator;
-
+      }
 
 
       ["change", "input"].forEach(function (e) {
         errorStandard[i].addEventListener("input", () => {
-          console.log(newValidator);
           if (errorStandard[i].validity.valid == true) {
             // newValidator.pop();
             // newValidator = removeDuplicates(newValidator);
@@ -108,7 +107,6 @@ function toggleValidator() {
         });
       });
     }
-    console.log(listValidator)
 
   });
 </script>
@@ -223,7 +221,7 @@ function toggleValidator() {
         inputType="checkbox"
         checkName="selectTag"
         checkId="selectTag"
-        isRequired={true}
+        isRequired={false}
         {data}
       />
 

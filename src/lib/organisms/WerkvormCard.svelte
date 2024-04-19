@@ -11,7 +11,7 @@
 
 <article>
 	<ul>
-		{#if workform.tags.length > 0 && !undefined}
+		{#if workform.sub_tags.length > 0 && !undefined}
 			{#each workform.sub_tags as tag}
 				<li style="border-color: {tag.sub_tag_id.color};">{tag.sub_tag_id.title}</li>
 			{/each}

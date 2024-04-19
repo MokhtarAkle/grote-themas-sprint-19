@@ -32,13 +32,11 @@
 		for(let i = 0; i < buttonviewer.length; i++){
 			buttonviewer[i].addEventListener("click", () =>{
 				dropdownviewer[i].classList.toggle("hidden")
-				console.log("yta")
 			})
 		}
 		
 	});
 	function checkColor(){};
-	console.log(data)
 </script>
 
 <div class="dropdown" id="mega-menu">

@@ -6,7 +6,6 @@
     export let isRequired;
     export let data;
 
-    console.log(data.tag)
 </script>
 
 {#each data.tag as tag}
@@ -14,7 +13,7 @@
 {#each data.sub_tag as sub}
 {#if tag.sub_tag && tag.sub_tag.includes(sub.id)}
 <label>
-    <input type="{inputType}" name="{checkName}" id="{checkId}" required="{isRequired}">
+    <input type="{inputType}" name="{checkName}" id="{checkId}" required={isRequired} value={sub.id}>
     <span>{sub.title}</span>
 </label>
 {/if}
