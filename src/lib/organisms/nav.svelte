@@ -30,7 +30,7 @@
 	<div class="mobile-menu">
 		<details>
 			<summary>
-				<figure>
+				<div class="figure-div">
 					<div>
 						<svg
 							width="24"
@@ -92,8 +92,8 @@
 							>
 						</svg>
 					</div>
-					<figcaption>menu</figcaption>
-				</figure>
+					<span class="caption-span">menu</span>
+				</div>
 			</summary>
 			<ul id="mobile-menu">
 				<li class="menu-item">
@@ -355,7 +355,7 @@ nav button {
     text-transform: capitalize;
 }
 
-nav figure {
+nav .figure-div {
     align-items: center;
     display: flex;
     gap: var(--unit-small);
@@ -411,14 +411,14 @@ li.menu-item button:hover,
 }
 
 /* Menu button */
-nav button figcaption {
+nav button .caption-span {
     font-family: 'Open sans';
     font-size: 1.25rem;
     font-weight: 500;
     transition: var(--animation-quick) ease-in-out;
 }
 
-nav button:hover figcaption {
+nav button:hover .caption-span {
     font-weight: 700;
 }
 
