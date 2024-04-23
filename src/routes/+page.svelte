@@ -62,10 +62,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Kleine werkvormen voor grote thema's</title>
-</svelte:head>
-
 <main>
 	<IntroSection />
 
