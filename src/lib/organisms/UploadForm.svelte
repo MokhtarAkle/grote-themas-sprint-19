@@ -9,7 +9,7 @@
   import LimitedFormField from "../molecules/LimitedFormField.svelte";
   import CheckFormField from "$lib/molecules/CheckFormField.svelte";
   import AccessValidator from "../molecules/AccessValidator.svelte";
-  import { listValidatorClass } from '$lib/utils/tagstore.js';
+  import { listValidatorClass } from "$lib/utils/tagstore.js";
 
   export let formAction;
   export let formMethod;
@@ -55,12 +55,12 @@
   }
 
   function isEmpty(element, index, array) {
-        return element === " ";
+    return element === " ";
   }
 
-function toggleValidator() {
-  validatorHidden = false;
-}
+  function toggleValidator() {
+    validatorHidden = false;
+  }
   onMount(async () => {
     let errorStandard = document.querySelectorAll("input, select");
     let labelStandard = document.querySelectorAll("label");
@@ -68,14 +68,13 @@ function toggleValidator() {
     let removed = false;
 
     for (let i = 0; i < errorStandard.length; i++) {
-      if(errorStandard[i].type != "checkbox"){
-      errorStandard[i].setCustomValidity(
-        "Vul " + labelStandard[i].innerHTML + " in."
-      );
-      newValidator.push(errorStandard[i].validationMessage);
-      newValidator = newValidator;
+      if (errorStandard[i].type != "checkbox") {
+        errorStandard[i].setCustomValidity(
+          "Vul " + labelStandard[i].innerHTML + " in."
+        );
+        newValidator.push(errorStandard[i].validationMessage);
+        newValidator = newValidator;
       }
-
 
       ["change", "input"].forEach(function (e) {
         errorStandard[i].addEventListener("input", () => {
@@ -107,11 +106,10 @@ function toggleValidator() {
         });
       });
     }
-
   });
 </script>
 
-<AccessValidator bind:this={listValidator} {newValidator} {validatorHidden}/>
+<AccessValidator bind:this={listValidator} {newValidator} {validatorHidden} />
 <form
   action={formAction}
   method={formMethod}
@@ -214,16 +212,30 @@ function toggleValidator() {
       accepted={"video/*"}
       inputHint="Bijv. Een video van de werkvorm."
     />
-        <CheckFormField
-        iconSrc="/images/icons/contact.svg"
-        labelFor="selectTag"
-        labelText="Selecteer relevante tags"
-        inputType="checkbox"
-        checkName="selectTag"
-        checkId="selectTag"
-        isRequired={false}
-        {data}
-      />
+
+    <FileFormField
+      iconSrc="/images/icons/file.svg"
+      labelFor="werkvormFile"
+      labelText="Bestand werkvorm"
+      inputType="file"
+      inputName="werkvormFile"
+      inputId="werkvormFile"
+      inputPlaceholder="Selecteer aanvullende bestanden..."
+      isRequired={false}
+      hasMultiple={true}
+      accepted={".pdf, .doc, .docx, .txt, .xls, .csv, .rtf"}
+      inputHint="Bijv. Een pdf met les materiaal."
+    />
+    <CheckFormField
+      iconSrc="/images/icons/contact.svg"
+      labelFor="selectTag"
+      labelText="Selecteer relevante tags"
+      inputType="checkbox"
+      checkName="selectTag"
+      checkId="selectTag"
+      isRequired={false}
+      {data}
+    />
 
     <!-- <SelectFormField
     iconSrc="/images/icons/school.svg"
@@ -237,7 +249,7 @@ function toggleValidator() {
   /> -->
   </div>
 
-  <Button btnType="submit" {btnText} on:click= {toggleValidator}></Button>
+  <Button btnType="submit" {btnText} on:click={toggleValidator}></Button>
 </form>
 
 <!-- After upload message -->

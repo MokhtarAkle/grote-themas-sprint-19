@@ -74,6 +74,7 @@ export const actions = {
 		// Get all files from formData object
 		const werkvormThumbnail = formData.get('werkvormThumbnail')
 		const werkvormVideo = formData.get('werkvormVideo')
+		const werkvormFile = formData.getAll('werkvormFile')
 		const filesToUpload = new FormData()
 		const allFiles = [werkvormThumbnail, werkvormVideo]
 		let subTest;
@@ -87,6 +88,16 @@ export const actions = {
 				filesToUpload.append('files', file)
 			}
 		})
+		werkvormFile.forEach((file) => {
+			// If file size is 0, don't upload
+			if (file.size === 0) {
+				console.log('File size is 0')
+			} else {
+				// Push all files with size > 0 to filesToUpload array
+				filesToUpload.append('files', file)
+			}
+		})	
+		console.log(werkvormFile)
 
 		// Upload files to Directus
 		const uploadData = await uploadFile(filesToUpload)
@@ -99,10 +110,11 @@ export const actions = {
 		const werkvormOpleiding = formData.get('werkvormOpleiding')?.toString() || null
 		const werkvormContactpersoon = formData.get('werkvormContactpersoon')?.toString() || null
 		const werkvormSubtags = formData.getAll('selectTag') || null
+		let i = -1;
 
 		let werkvormThumbnailDataID
 		let werkvormVideoDataID
-		console.log(werkvormSubtags)
+		let werkvormFileDataID = new Array();
 		// Check if uploadData is an array
 		if (Array.isArray(uploadData.data)) {
 			const werkvormThumbnailID = uploadData.data.filter((file) => {
@@ -114,6 +126,18 @@ export const actions = {
 				return file.filename_download === werkvormVideo.name
 			})
 			werkvormVideoDataID = werkvormVideoID[0].id
+
+			werkvormFile.forEach(() => {
+				i++;
+				const werkvormFileID = uploadData.data.filter((file) => {
+					return file.filename_download === werkvormFile[i].name
+
+				})
+				console.log(werkvormFileID[0].id, i)
+				werkvormFileDataID.push({directus_files_id: werkvormFileID[0].id})
+			})	
+
+
 		} else {
 			werkvormThumbnailDataID = uploadData.data.id
 		}
@@ -127,7 +151,18 @@ export const actions = {
 				.replace(/[^\w-]+/g, '') +
 			'-' +
 			Date.now()
-
+console.log(JSON.stringify({
+	title: werkvormName,
+	shortDescription: werkvormShortDesc,
+	description: werkvormDesc,
+	course: werkvormOpleiding,
+	contact: werkvormContactpersoon,
+	thumbnail: werkvormThumbnailDataID,
+	video: werkvormVideoDataID,
+	files: werkvormFileDataID,
+	link: slug,
+	sub_tags: werkvormSubtags
+}))
 		// Send data to Directus
 		const response = await fetch('https://platform-big-themes.directus.app/items/workform', {
 			method: 'POST',
@@ -143,13 +178,14 @@ export const actions = {
 				contact: werkvormContactpersoon,
 				thumbnail: werkvormThumbnailDataID,
 				video: werkvormVideoDataID,
+				files: werkvormFileDataID,
 				link: slug,
 				sub_tags: werkvormSubtags
-			})
-		})
+			}) 
+		}) 
+
 			.then((response) => response.json())
 			.catch((error) => error)
-
-		console.log(response)
+		console.log(response.errors)
 	}
 }
