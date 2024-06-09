@@ -18,6 +18,7 @@
   let listValidator;
   let newValidator = new Array();
   let validatorHidden = true;
+  let errorMessage = "";
 
   data = data.data;
   let tagOptions = data.tag.map((tag) => {
@@ -37,12 +38,25 @@
   let loading = false;
   let showUpload = true;
   let showVerify = false;
-
+  let showLoad = false;
   const handleSubmit = () => {
     loading = true;
+    if(loading){
+      showLoad = true;
+      showUpload = false;
+    }
     return async ({ result }) => {
       await applyAction(result);
       loading = false;
+      showLoad = false;
+      showUpload = false;
+      showVerify = true;
+
+      errorMessage = "";
+
+      if (result.type === "failure") {
+        errorMessage = result.response.error;
+      } 
     };
   };
 
@@ -59,14 +73,18 @@
   }
 
   function toggleValidator() {
-    validatorHidden = false;
+    if (newValidator.every(isEmpty)) {
+              validatorHidden = true;
+            }
+            else{
+              validatorHidden = false;
+            }
   }
   onMount(async () => {
     let errorStandard = document.querySelectorAll("input, select");
     let labelStandard = document.querySelectorAll("label");
     let submitButton = document.querySelector("button");
     let removed = false;
-
     for (let i = 0; i < errorStandard.length; i++) {
       if (errorStandard[i].type != "checkbox") {
         errorStandard[i].setCustomValidity(
@@ -115,7 +133,6 @@
   method={formMethod}
   use:enhance={handleSubmit}
   class:showLogin={showUpload}
-  on:submit={toggleUpload}
   enctype="multipart/form-data"
 >
   <div class="form-content">
@@ -252,11 +269,16 @@
   <Button btnType="submit" {btnText} on:click={toggleValidator}></Button>
 </form>
 
+<img src="/images/loading.svg" class:showLoad alt="loading symbol">
 <!-- After upload message -->
 <article class:showVerify>
   <h2>Werkvorm succesvol geüpload.</h2>
   <p>Het kan even duren voor deze zichtbaar is.</p>
 </article>
+
+{#if errorMessage}
+<p class="error-message">{errorMessage}</p>
+{/if}
 
 <style>
   form {
@@ -281,6 +303,10 @@
     display: flex;
   }
 
+  .showLoad {
+    display: flex;
+  }
+
   article {
     display: none;
     flex-direction: column;
@@ -300,6 +326,10 @@
     font-size: 0.9rem;
     font-weight: 400;
     text-align: center;
+  }
+
+  img{
+    display: none;
   }
 
   @media (min-width: 48rem) {
