@@ -167,9 +167,9 @@
 			<span class="appear"></span>
 		<LogoutButton></LogoutButton>
 		</div>
-		<li>
-		<ul class="button-grouper">
 		<li role="menuitem">
+		<ul class="button-grouper">
+		<li>
 			<button id="filterSearchDesktop" class="filterSearch"aria-expanded="false" type="button">
 				<svg
 					width="24"
@@ -198,7 +198,7 @@
 			</button>
 		</li>
 
-		<li role="menuitem">
+		<li>
 			<a class="link-primary" href="/upload">
 				<svg
 					width="24"
@@ -508,6 +508,7 @@ ul li button:focus {
     gap: var(--unit-small);
     padding: 0.2rem var(--unit-small);
     position: relative;
+	color: black;
 }
 
 .link-primary::before {
